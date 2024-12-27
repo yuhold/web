@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抽奖页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #FF5733;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>恭喜您获胜！来抽奖试试吧！</h1>
+    <button class="button" id="drawButton" onclick="drawPrize()">点击抽奖</button>
+    <div class="result hidden" id="result"></div>
+
+    <script>
+        // 抽奖函数：改名为 cj
+        function cj(prizes) {
+            let totalWeight = prizes.reduce((sum, prize) => sum + prize.weight, 0);
+            let randomNum = Math.floor(Math.random() * totalWeight);
+            for (let prize of prizes) {
+                randomNum -= prize.weight;
+                if (randomNum < 0) {
+                    return [prize.name];
+                }
+            }
+            return [];
+        }
+
+        // 奖品数组
+        const prizes = [
+            {"name": "当一天班主任", "weight": 10},
+            {"name": "免一次作业", "weight": 30},
+            {"name": "免搞一次卫生", "weight": 60}
+        ];
+
+        // 抽奖事件
+        function drawPrize() {
+            // 禁用按钮，防止再次点击
+            document.getElementById('drawButton').disabled = true;
+            
+            // 执行抽奖
+            const winningPrize = cj(prizes);
+
+            // 隐藏抽奖按钮和其他控件，显示结果
+            document.getElementById('drawButton').classList.add('hidden');
+            
+            // 显示中奖结果
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerText = "恭喜！中奖奖品是: " + (winningPrize.length ? winningPrize[0] : "没有中奖");
+            resultDiv.classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
