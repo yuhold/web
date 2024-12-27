@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜密码游戏</title>
+    
+    <!-- 添加网页图标 -->
+    <link rel="icon" href="/image/1.jpg" type="image/jpg">
+
+    <!-- 引入样式文件 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>猜密码小游戏</h1>
+        <div class="buttons">
+            <button onclick="startGame('easy')">简单</button>
+            <button onclick="startGame('medium')">普通</button>
+            <button onclick="startGame('hard')">困难</button>
+        </div>
+        <div id="gameInfo" class="game-info">
+            <p>选择难度开始游戏！</p>
+        </div>
+        <p id="countdown"></p>  <!-- 倒计时显示 -->
+    </div>
+
+    <!-- 引入外部的 script.js -->
+    <script src="script.js"></script>
+</body>
+</html>
